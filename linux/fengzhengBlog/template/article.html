@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ article.title }}
+{% endblock %}
+
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="/ueEditor/third-party/SyntaxHighlighter/shCoreDefault.css">
+<script type="text/javascript" src="/ueEditor/third-party/SyntaxHighlighter/shCore.js"></script>
+<script type="text/javascript" src="/js/fengzheng.ajax.js"></script>
+<script type="text/javascript">
+SyntaxHighlighter.all();
+</script>
+
+<div class="leftcontent col-sm-12 col-md-9">
+	<div class="page-header">
+		<h2>{{ article.title }}</h2>
+	</div>
+	{% autoescape off %}
+	{{ article.content }}
+	{% endautoescape %}
+
+	<div class="readarticle col-sm-12 col-md-12">
+		<span>{{ article.publish_date|date:"Y-m-d" }}</span>
+		<a href="">{{article.commentcount}} 评论</a>
+		{{article.readcount}} 浏览
+	</div>
+<div class="article_view_footer col-sm-12 col-md-12">
+{% include "comment.html" %}
+</div>
+</div>
+
+
+<div class="rightcontent col-sm-0 col-md-3">
+	<div class="bs-callout-info">所有分类</div>
+	<div class="right_classic">
+		{% include "rightNav.html" %}
+	</div>
+</div>
+
+
+{% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}

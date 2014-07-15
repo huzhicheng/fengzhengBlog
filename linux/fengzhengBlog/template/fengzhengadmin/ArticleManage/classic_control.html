@@ -1,0 +1,35 @@
+<div id="category_zone" data-classic="" class="widget-main padding-8">
+</div>
+<input type="text" name="category_id_hidden" id="category_id_hidden" style="display:none;" value="null" required="required"/>
+
+<script type="text/javascript">
+$(function(){
+	getCategory();
+})
+
+function setSelectedClassic(id){
+	$(".label-category").css("background-color","#3a87ad");
+	$("#category_"+id).css("background-color","#d9534f");
+	$("#category_id_hidden").val(id);
+}
+
+function getCategory(){
+	$.ajax({
+		url:"/getCategory",
+		type:"post",
+		success:function(result){
+			if(result!=undefined){
+				var categories = JSON.parse(result);
+				$.each(categories,function(k,v){
+					$("#category_zone").append("<a href='javascript:setSelectedClassic("+ v.id +");'><span class='label-category' id='category_"+ v.id +"'>"+ v.name +"</span></a>")
+				})
+			}
+		},
+		error:function(a,b,c){
+			alert(a+b+c);
+		}
+
+	})
+}
+
+</script>

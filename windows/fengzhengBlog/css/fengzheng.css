@@ -1,0 +1,165 @@
+﻿* {
+    margin:0 auto;
+    /*text-align:center;*/
+}
+body
+{
+	font:12px/1.5 Microsoft YaHei,Tahoma,Helvetica,'SimSun',sans-serif;
+	/*background-color: #e4e6e9;
+	font:"Droid Serif",Georgia,"Times New Roman",Times,STHeiti,SimSun,serif";*/
+}
+
+hr{
+	height:1px;
+	border:none;
+	border-top:1px solid #006DB8;
+}
+.nav a,.navbar-header a{
+	color: white;
+}
+.navbar-custom{
+	background-color: #209E85;
+	border-bottom: 1px solid #3c7300;
+}
+.navbar-header{
+	float:right;
+}
+.fengzhengtop{
+	width:100%;
+	height: 80px;
+}
+.icon-bar{
+	background-color: white;
+}
+.page-header a{
+	color:#000000;
+	text-decoration:none;
+}
+.page-header a:hover{
+	color: #0077C5;
+}
+.fengzhengarticle{
+
+}
+.article_view_footer{
+	border-top: 3px solid #209E85;
+	padding-top:5px;
+}
+.pull-right{
+	text-align: right;
+	padding-right: 15px;
+	padding-top: 10px;
+}
+.leftcontent{
+	padding-top: 10px;
+	height: auto;
+	display: block;
+	padding-bottom:10px;
+}
+
+.leftcontent a {
+	color:#017e66 !important;
+	text-decoration:none;
+}
+.rightcontent{
+	
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.articleinfo{
+	margin-left: 0px;
+}
+.articleinfo time{
+	float: right;
+	color:#888;
+	font-size: 12px;
+}
+.author{
+	color: #0077C5;
+	font-weight: bold;
+	font-size: 12px;
+}
+.summaryinfo{
+	padding-top:10px;
+	line-height: 23px;
+	max-height: 200px;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+::selection{
+	background: #24890d;
+	color: white;
+}
+.fengzheng_classic_a{
+	line-height: 30px;
+	height: 30px;
+	display: inline-table;
+	text-decoration: none !important;
+}
+
+.fengzheng_classic_a span:hover{
+	background-color:#fff;
+	color:#5cb85c;
+}
+.nav>li>a:hover{
+	background-color: #2a6496 !important;
+}
+.fix-layout{
+	position:fixed;
+	right: 20px;
+	bottom: 20px;
+	display: block;
+	z-index: 999;
+}
+.fix-layout span{
+	display: block;
+
+}
+.readarticle{
+	float:right;
+	margin-right: 10px;
+	text-align: right;
+	padding-bottom: 10px;
+}
+.readarticle i{
+	padding:10px;
+}
+.readarticle span{margin-right:10px;}
+.bs-callout-info{
+	border-bottom: 3px solid #209E85;
+	height: 30px;
+	line-height: 30px;
+	vertical-align: middle;
+	font-size: 14px;
+	font-weight: bold;
+	padding-left: 5px;
+}
+.right_classic{
+	margin-top: 5px;
+}
+/*****页脚信息*****/
+.fengzhengfooter{
+	margin: 10px auto;
+	
+}
+.copyright{
+	text-align: center;
+}
+
+/*****评论****/
+.comment-item{
+	margin: 10px 0;
+	padding: 15px;
+	background: #f0f3f2;
+}
+.fmt{
+	font-size: 14px;
+	word-wrap:break-word;
+	color: #3276b1
+}
+.comment-meta span{
+	float: right;
+	margin-right: 5px;
+	color: #3276b1;
+}

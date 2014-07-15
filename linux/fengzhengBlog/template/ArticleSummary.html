@@ -1,0 +1,28 @@
+{% for article in articles %}
+<div class="fengzhengarticle">
+	<div class="page-header">
+		<h2>
+			<a href='/article/{{ article.id }}'>{{article.title}}</a>
+		</h2>
+	</div>
+	<div class="articleinfo"> 
+		<span class='author'>{{article.author}}</span>
+		<time>{{article.publish_date|date:"Y-m-d"}}</time>
+
+	</div>
+
+	<div class="summaryinfo">
+		{% autoescape off %}
+		{{ article.content }}
+		{% endautoescape %}
+	</div>
+	<div class="article_footer">
+		<div class="readarticle">
+			<i class="icon-eye-open">{{article.readcount}}</i>
+			<i class="icon-comments">{{article.commentcount}}</i>
+		</div>
+		<a href="/article/{{ article.id }}"><button type="button" class="btn btn-primary btn-xs">阅读全文...</button></a>
+	</div>
+</div>
+
+{% endfor %}

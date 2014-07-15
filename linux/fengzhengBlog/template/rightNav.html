@@ -1,0 +1,4 @@
+<a class="fengzheng_classic_a" href="/"><span class="label label-success">所有</span></a>
+{% for item in classes %}
+<a class="fengzheng_classic_a" href="/?cate={{ item.id }}"><span class="label label-success">{{item.name}}</span></a>
+{% endfor %}

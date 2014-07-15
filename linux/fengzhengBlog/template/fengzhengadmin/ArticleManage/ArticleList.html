@@ -1,0 +1,203 @@
+{% extends "fengzhengadmin/master.html" %}
+{% block specificcss %}
+<link rel="stylesheet" href="/css/fengzheng.admin.css" />
+{% endblock %}
+{% block content %}
+<div class="table-responsive">
+	<div class="articleList_actionbar">
+		<a class="btn  btn-xs" href="javascript:void(0);" onclick="deleteSelected()"><i class="icon-remove"></i> 批量删除</a>
+</div>
+			<table id="table_articlelist" class="table table-striped table-bordered table-hover">
+				<thead>
+					<tr>
+						<th class="center">
+							<label>
+								<input type="checkbox" class="ace" />
+								<span class="lbl"></span>
+							</label>
+						</th>
+						<th>标题</th>
+						<th>作者</th>
+						<th class="hidden-480">分类</th>
+
+						<th>
+							<i class="icon-time bigger-110 hidden-480"></i>
+							标签
+						</th>
+						<th class="hidden-480">状态</th>
+						<th>发布日期</th>
+
+						<th></th>
+					</tr>
+				</thead>
+
+				<tbody>
+					{% for article in list %}
+					<tr>
+						
+						<td class="center" data-id="{{ article.id }}">
+							<label>
+								<input type="checkbox" class="ace" />
+								<span class="lbl"></span>
+							</label>
+						</td>
+
+						<td>
+							<a href="#">{{ article.title }}</a>
+						</td>
+						<td>{{ article.author.displayname }}</td>
+						<td class="hidden-480">{{ article.classic.name }}</td>
+						<td>{{ article.tags }}</td>
+
+						<td class="hidden-480">
+							{% if article.ispublished %}
+							<span class="label label-sm label-success">已发布</span>
+							{% else %}
+						     <span class="label label-sm label-warning">草稿</span>
+						     {% endif %}
+							
+						</td>
+						<td>{{ article.publish_date|date:"Y-m-d" }}</td>
+						<td>
+							<div class="visible-md visible-lg hidden-sm hidden-xs action-buttons">
+								<a class="blue" target="_blank" href="/article/{{ article.id }}">
+									<i class="icon-zoom-in bigger-130"></i>
+								</a>
+
+								<a class="green" href="javascript:void(0);">
+									<i class="icon-pencil bigger-130"></i>
+								</a>
+
+								<a class="red" href="#">
+									<i class="icon-trash bigger-130"></i>
+								</a>
+							</div>
+
+							<div id="small_action" class="visible-xs visible-sm hidden-md hidden-lg">
+								<div class="inline position-relative">
+									<button class="btn btn-minier btn-yellow dropdown-toggle" data-toggle="dropdown">
+										<i class="icon-caret-down icon-only bigger-120"></i>
+									</button>
+
+									<ul class="dropdown-menu dropdown-only-icon dropdown-yellow pull-right dropdown-caret dropdown-close">
+										<li>
+											<a href="/article/{{ article.id }}" target="_blank" class="tooltip-info" data-rel="tooltip" title="View">
+												<span class="blue">
+													<i class="icon-zoom-in bigger-120"></i>
+												</span>
+											</a>
+										</li>
+
+										<li>
+											<a href="javascript:void(0);" class="tooltip-success" data-rel="tooltip" title="Edit">
+												<span class="green">
+													<i class="icon-edit bigger-120"></i>
+												</span>
+											</a>
+										</li>
+
+										<li>
+											<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+												<span class="red">
+													<i class="icon-trash bigger-120"></i>
+												</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						</td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+
+</div>
+<script src="/js/assets/jquery.dataTables.min.js"></script>
+<script src="/js/assets/jquery.dataTables.bootstrap.js"></script>
+<script type="text/javascript">
+var oTable;
+$(function(){
+	oTable = $("#table_articlelist").dataTable( {
+        "aoColumns": [
+        {"bSortable": false},
+        null, null,null, null, null,null,
+        {"bSortable": false}
+        ],
+         "oLanguage":
+         {
+            "sProcessing": "正在加载中......",
+            "sLengthMenu": "每页显示 _MENU_ 条记录",
+            "sZeroRecords": "对不起，查询不到相关数据！",
+            "sEmptyTable": "表中无数据存在！",
+            "sInfo": "当前显示 _START_ 到 _END_ 条，共 _TOTAL_ 条记录",
+            "sInfoFiltered": "数据表中共为 _MAX_ 条记录",
+            "sSearch": "搜索",
+            "oPaginate": {
+                          "sFirst": "首页",
+                          "sPrevious": "上一页",
+                          "sNext": "下一页",
+                          "sLast": "末页"
+                          }
+         } //多语言配置
+                                 
+    });
+
+    $('#table_articlelist th input:checkbox').on('click' , function(){
+		var that = this;
+		$(this).closest('table').find('tr > td:first-child input:checkbox')
+		.each(function(){
+			this.checked = that.checked;
+			$(this).closest('tr').toggleClass('table_selected');
+		});
+	});
+});
+
+
+//绑定查看按钮
+// $('#table_articlelist tbody').on( 'click', '.blue', function () {
+//     alert($(this).closest('tr').find("td:first").html());
+// } );
+
+//绑定编辑按钮
+$('#table_articlelist tbody').on( 'click', '.green', function () {
+   	var post_id = $(this).closest('tr').find("td:first").attr("data-id");
+   	window.location.href = "article-edit/"+post_id;
+} );
+
+//绑定删除按钮
+$('#table_articlelist tbody').on( 'click', '.red', function () {
+   alert($(this).closest('tr').find("td:first").attr("data-id"));
+} );
+
+function deleteSelected(){
+	var checkboxes = $('#table_articlelist tr td input:checkbox');
+	var ids='';
+	var index = 0;
+	$.each(checkboxes,function(k,v){
+		if(v.checked){
+			if(index>0) 
+				ids+=",";
+			ids+=$(v).closest('tr').find("td:first").attr("data-id");
+			index+=1;
+		}
+	});
+	if (ids!=""){
+		$.ajax({
+			type:"post",
+			data:{"ids":ids},
+			url:"/delete-Article",
+			success:function(e){
+				if(e=="ok"){
+					window.location.href = window.location.href;
+				}
+			},
+			error:function(a,b,c){
+				alert(a+b+c);
+			}
+		});
+	}
+}
+</script>
+
+{% endblock %}

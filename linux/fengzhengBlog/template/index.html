@@ -1,0 +1,23 @@
+﻿{% extends "base.html" %}
+
+{% block title %}
+风筝
+{% endblock %}
+
+
+{% block content %}
+<div class="leftcontent col-sm-12 col-md-9">
+	{% include "ArticleSummary.html" %}
+</div>
+<div class="rightcontent col-sm-0 col-md-3">
+	<div class="bs-callout-info">所有分类</div>
+	<div class="right_classic">
+		{% include "rightNav.html" %}
+	</div>
+</div>
+{% endblock %}
+
+
+{% block footer %}
+
+{% endblock %}

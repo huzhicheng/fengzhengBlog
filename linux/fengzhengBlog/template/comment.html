@@ -1,0 +1,54 @@
+<div id="#comment" class="comment">
+	<div>
+		{% for comment in comments %}
+		<section class="comment-item">
+		<div class="comment-content fmt"><p>{{ comment.commentator }}({{comment.email}}):</p></div>
+		<div class="comment-meta">{{ comment.comment_content }}
+			<span>
+			{{ forloop.counter }}#
+			</span>
+		</div>
+	</section>
+		{% endfor %}
+	</div>
+
+	<div class="col-sm-5">
+		<input type="text" class="form-control" id="nickname" placeholder="请输入昵称"><br />
+		<input type="email" class="form-control" id="commentator_email" placeholder="请输入邮箱"><br/>
+	</div>
+
+	<div class="col-sm-12">
+		<textarea class="form-control" id="comment_content" rows="5"></textarea>
+	</div>
+	<div class="col-sm-12 pull-right">
+		<button type="button" onclick="commit_comment()" class="btn btn-primary">提交评论</button>
+	</div>
+</div>
+<script type="text/javascript">
+function commit_comment(){
+	var articleId = "{{ article.id }}";
+	var nickname = $("#nickname").val();
+	var commentator_email = $("#commentator_email").val();
+	var content = $("#comment_content").val();
+	var data = {"articleId":articleId,"nickname":nickname,"email":commentator_email,"content":content}
+	asynCommitComment(data);
+}
+
+
+function asynCommitComment(data){
+	$.ajax({
+		type:"post",
+		url:"/comment-commit",
+		data:data,
+		success:function(result){
+			
+		},
+		complete:function(result){
+			window.location.href = window.location.href;
+		},
+		error:function(a,b,c){
+			alert(a+b+c);
+		}
+	});
+}
+</script>
